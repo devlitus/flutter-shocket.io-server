@@ -17,10 +17,14 @@
       console.log('Perdimos comunicación');
     });
 
-    socket.emit('message', {name: 'carles'});
+    socket.emit('message', {'emito': 'desde el servidor',name: 'carles'});
     socket.on('message', function(payload){
       console.log(payload);
     })
+    
+    socket.on('bands', function (payload) {
+    console.log(payload);
+  })
   </script>
 </body>
 </html>

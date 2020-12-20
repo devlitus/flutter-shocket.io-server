@@ -16,10 +16,23 @@ io.on('connection', client => {
   client.on('disconnect', () => { console.log('Cliente desconectado') });
 
   client.on('message', (payload) => {
-    console.log('Mensaje', payload);
+    console.log('message', payload);
     client.broadcast.emit('message', payload);
   });
   client.emit('bands', bands.getBands());
 
+  client.on('vote-band', (data) => {
+    bands.voteBand(data.id);
+    io.emit('bands', bands.getBands());
+  });
 
+  client.on('add-band', (data) => {
+    bands.addBands(new Band(data.name));
+    io.emit('bands', bands.getBands());
+  });
+
+  client.on('delete-band', (data) => {
+    bands.deleteBand(data.id);
+    io.emit('bands', bands.getBands());
+  })
 });

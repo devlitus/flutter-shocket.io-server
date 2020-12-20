@@ -21,9 +21,10 @@
     socket.on('message', function(payload){
       console.log(payload);
     })
-    
+
     socket.on('bands', function (payload) {
-    console.log(payload);
+      console.clear()
+      console.table(payload);
   })
   </script>
 </body>
